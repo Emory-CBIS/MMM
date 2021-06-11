@@ -32,12 +32,12 @@ In this project, we develop a multimodal multilevel model (MMM) to infer brain m
 3. Run bootstrap\_scripts to generate multiple bootstrap replicates based on the results from 2 and then fit the model. Here are the detalied steps in the Run bootstrap\_scripts.
 
    + Load fitted model from results 2 (for example fit_1.RData) 
-   + Obtain all the parameters and Simulation bootstrap data
+   + Obtain all the parameters and Simulation of bootstrap data
    + Set the inital parameter to estimation
    + Call EM_groupmod_log_Firth function in MMM_EM.r script to run MMM model
    + Save fitted model for boostrap data
    
-4. Repeat 2 for 1000 times and for each simulation replicates repeat 3 for 200 times.
+4. Repeat Step 2 for 1000 times and for each simulation replicate repeat Step 3 for 200 times.
 
 ## R version
 R.3.6.1
