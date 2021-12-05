@@ -41,9 +41,9 @@ In this project, we develop a multimodal multilevel model (MMM) to infer brain m
    + Call EM_groupmod_log_Firth function in MMM_EM.r script to run MMM model
    + Save fitted model (fitsim.RData in the Data folder is an example of fitted model)
    
-3. Run bootstrap\_scripts to generate multiple bootstrap replicates based on the results from 2 and then fit the model. Here are the detailed steps included in bootstrap\_scripts.
+3. Run bootstrap\_scripts to generate multiple bootstrap replicates based on the results from Step 2 and then fit the model. Here are the detailed steps included in bootstrap\_scripts.
 
-   + Load fitted model from results 2 (for example, fitsim.RData) 
+   + Load fitted model from Step 2 (for example, fitsim.RData) 
    + Obtain all the parameters needed to generate bootstrap data
    + Set the initial parameter to estimation
    + Call EM_groupmod_log_Firth function in MMM_EM.r script to run MMM model
