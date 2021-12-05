@@ -12,7 +12,6 @@ path <- "./Data/"
 # ------------------------
 load(paste(path, "fitpnc.RData",sep=""))
   
-
 # ------------------------
 # load bootstrap samples
 # ------------------------
@@ -52,7 +51,10 @@ group.idx2 <- 2; group.idx1 <- 1  # focus on the analysis of Old Female (group i
 q <- dim(fit.obs$X)[2]
 M <- fit.obs$M
 G <- fit.obs$G
-  
+
+# ---------------------
+# Structural Results
+# ---------------------
 # observed data
 prob.obs <- Calc_Prob(M=fit.obs$M, G=fit.obs$G, Beta.a=fit.obs$Beta.a, Beta.f0=fit.obs$Beta.f0, Beta.f1=fit.obs$Beta.f1, X=fit.obs$X)
 
@@ -87,10 +89,13 @@ p.diff.a <- matrix(p.diff.a, nrow = 9)
 signif.diff.a <- p.diff.a < alpha
 
 # visualization
+# reproduce Figure 2
 pdf(file = paste(output_folder, "signif_anatomical_diff_","G", group.idx2, " & G", group.idx1, ".pdf", sep=""))
 mycol <-  colorRamp2( c(1 - alpha, 1), c("whitesmoke","yellow"))
 Heatmap9by9.signif(mat.diff.obs, col = mycol, signif = signif.diff.a, pmat = p.diff.a)
 dev.off()
+
+# reproduce Figure 3
 pdf(file = paste(output_folder, "legend_anantomical_diff.pdf"))
 lgd = Legend(col_fun = colorRamp2(c(0, alpha), c("yellow","whitesmoke")), title = "p-value", at = c(0, alpha))
 draw(lgd)
@@ -152,11 +157,13 @@ for(state in 1:3){
 }
   
   
+# reproduce Figure 6
 alpha.cf <- 0.01
 for(state in 1:3) {
     signif.f0 <- p.diff.f0.boot.combine[,((state-1)*M+1):(state*M)] < alpha.cf
     signif.f1 <- p.diff.f1.boot.combine[,((state-1)*M+1):(state*M)] < alpha.cf
     mycol <-  colorRamp2( c(1 - alpha.cf, 1), c("grey90","yellow"))
+    
     png(filename = paste(output_folder, "sigif_conditional_diff0_G", group.idx2, " & G", group.idx1,"_state",state,"_", alpha.cf, ".png", sep=""), width = 600, height = 600)
     Heatmap9by9.signif(m0.diff.obs[,((state-1)*M+1):(state*M)], col = mycol, signif = signif.f0, pmat = p.diff.f0.boot.combine[,((state-1)*M+1):(state*M)])
     dev.off()
@@ -219,8 +226,9 @@ draw(lgd)
 dev.off()
 
 s <- c(1,2,3,5,6,4,7,8,9) #reorder of module
+
+# reproduce Figure 4 and Figure 5
 marginalFanalysis <- function(mat.obs, mat.boot, M, alpha = 0.01, state = "0", s = s){
-  
   mat.boot.sd <- apply(matrix(unlist(mat.boot), nrow = M*M), 1 , sd)
   p.diff <- round(2 * pmin(pnorm(matrix(mat.obs, byrow = TRUE, nrow = 1)/mat.boot.sd), pnorm(matrix(mat.obs, byrow = TRUE, nrow = 1)/mat.boot.sd, lower.tail = FALSE)), 5)
   p.diff <- matrix(p.diff, nrow = M)
@@ -232,7 +240,6 @@ marginalFanalysis <- function(mat.obs, mat.boot, M, alpha = 0.01, state = "0", s
   dev.off()
   circlegraph(mat.obs[s,s],  p.diff[s,s], filename = paste(output_folder, "Marginal Functional Diff state", state, ".pdf", sep = ""), alpha  = alpha, factor = -2, color.limit = 0.1)
 }
-
 marginalFanalysis(mat.obs = m_1.diff.obs, mat.boot = m_1.diff.boot, M = 9, alpha = 0.01, state = "-1", s = s)
 marginalFanalysis(mat.obs = m0.diff.obs, mat.boot = m0.diff.boot, M = 9, alpha = 0.01, state = "0", s = s)
 marginalFanalysis(mat.obs = m1.diff.obs, mat.boot = m1.diff.boot, M = 9, alpha = 0.01, state = "1", s = s)
