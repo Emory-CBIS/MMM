@@ -6,7 +6,7 @@ output:
 # Multi-Modal-Imaging
 
 ## About the Project
-In this project, we develop a multimodal multilevel model (MMM) to infer brain maturation white matter structural connection and intrinsic functional connection from dMRI and resting-state fMRI. Scripts and data included here can be used to implement the method, replicate simulation studies and reproduce main findings (Figure 3 and Figure 5) in the manuscript. For the real data analysis, since we are not allowed to release the original data, we provide sythetic data generated based on the real data to replicate Figure 2-6 of the real data analysis in the paper. please note that the results may have some differences from the real data analysis results in our paper for the PNC study.
+In this project, we develop a multimodal multilevel model (MMM) to infer brain maturation white matter structural connection and intrinsic functional connection from dMRI and resting-state fMRI. Scripts and data included here can be used to implement the method, reproduce the simulation studies and replicate the main findings in the manuscript. For the real data analysis, since we are not allowed to release the original data, we provide synthetic data generated based on the real data to replicate Figure 2-6 of the real data analysis in the paper. please note that the results based on the synthetic data may have some differences from the real data analysis results presented in our paper for the PNC study.
 
 ## Summary of Scripts in the Code Folder
 
